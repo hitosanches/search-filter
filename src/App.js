@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Header from "./backgrounds/bg-header-desktop.svg"
+import Header from "./backgrounds/bg-header-desktop.svg";
 
 function App() {
   const [job, setJob] = useState([]);
+  const [busca, setBusca] = useState("");
 
   useEffect(() => {
     fetch("./data.json", {
@@ -15,56 +16,131 @@ function App() {
       .then((res) => setJob(res));
   }, []);
 
-  
+  function role(e) {
+    setBusca(e.role);
+  }
+  function level(e) {
+    setBusca(e.level);
+  }
+  function tools(e, index) {
+    let value = e.tools[index];
+    e.tools.forEach((element) => {
+      if (element === value) {
+        setBusca(element);
+      }
+    });
+  }
+  function languages(e, index) {
+    let value = e.languages[index];
+    e.languages.forEach((element) => {
+      if (element === value) {
+        console.log(element);
+        setBusca(element);
+      }
+    });
+  }
   return (
     <div>
-          <div className="header">
-            <img src={Header} alt="HeaderDesktop" width="100%" />
-            <div className="search-bar">
-              aaaaaaa
+      <div className="header">
+        <img src={Header} alt="HeaderDesktop" width="100%" />
+        <div className="search-bar">
+          <div className="teste">
+            <div>
+            <label>{busca}<button hidden={true}>X</button></label>
+            
             </div>
           </div>
-      {job.map((result) => (
-        <div key={result.id} className="container">
-          <div className={result.featured ? "inner-container-left-bar" : "inner-container" }>
-            <div className="image-container">
-              <img className="image" src={result.logo} alt="logo" />
-            </div>
-            <div className="main">
-              <div className="main-info-container">
-                <div className="title">
-                  <div className="sub-container">
-                    <div className="newfeatured">
-                      <p className="company">{result.company}</p>
-                      <div>{result.new ? <p className="new">NEW!</p> : ""}</div>
-
-                      <div>
-                        {result.featured ? (
-                          <p className={`featured`}>FEATURED!</p>) : ("")}
+            <button className="clear-button">clear</button>
+        </div>
+      </div>
+      {job
+        .filter((e) => {
+          if (busca === "") {
+            return e;
+          } else {
+            if (
+              e.role === busca ||
+              e.languages[0] === busca ||
+              e.tools[0] === busca ||
+              e.level === busca
+            ) {
+              return e;
+            }
+          }
+        })
+        .map((result) => (
+          <div key={result.id} className="container">
+            <div
+              className={
+                result.featured ? "inner-container-left-bar" : "inner-container"
+              }
+            >
+              <div className="image-container">
+                <img className="image" src={result.logo} alt="logo" />
+              </div>
+              <div className="main">
+                <div className="main-info-container">
+                  <div className="title">
+                    <div className="sub-container">
+                      <div className="newfeatured">
+                        <p className="company">{result.company}</p>
+                        <div>
+                          {result.new ? <p className="new">NEW!</p> : ""}
+                        </div>
+                        <div>
+                          {result.featured ? (
+                            <p className={`featured`}>FEATURED!</p>
+                          ) : (
+                            ""
+                          )}
+                        </div>
                       </div>
-
-                    </div>
-                    <p className="position">{result.position} </p>
-                    <div className="subtitle">
-                      <p className="subtitle-dot">{result.postedAt}</p>{" "}
-                      <p className="subtitle-dot">{result.contract}</p>{" "}
-                      {result.location}
+                      <p className="position">{result.position} </p>
+                      <div className="subtitle">
+                        <p className="subtitle-dot">{result.postedAt}</p>{" "}
+                        <p className="subtitle-dot">{result.contract}</p>{" "}
+                        {result.location}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="filters-container">
-                <p className="filters">{result.role}</p>
-                <p className="filters">{result.level} </p>
-                {result.tools.length > 0 && (<p className="filters">{result.tools}</p>)}
-                <div className="languages">
-                {result.languages.map((lang, index) => ( <span className="filters" key={index} >{lang}</span> ))}
-                 </div>
+                <div className="filters-container">
+                  <button className="filters" onClick={() => role(result)}>
+                    {result.role}
+                  </button>
+                  <button className="filters" onClick={() => level(result)}>
+                    {result.level}{" "}
+                  </button>
+                  <div>
+                    {result.tools.map(
+                      (tool, index) =>
+                        result.tools.length > 0 && (
+                          <button
+                            key={index}
+                            className="filters"
+                            onClick={() => tools(result, index)}
+                          >
+                            {tool}
+                          </button>
+                        )
+                    )}
+                  </div>
+                  <div className="languages">
+                    {result.languages.map((lang, index) => (
+                      <button
+                        className="filters"
+                        key={index}
+                        onClick={() => languages(result, index)}
+                      >
+                        {lang}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 }

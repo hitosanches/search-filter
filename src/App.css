@@ -13,9 +13,20 @@ body{
 .search-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
   width: 900px;
   margin: 0 auto;
+  background: #fff;
+  height: 55px;
+  border-radius: 5px;
+  position: absolute;
+  margin-left: 260px;
+  margin-top: 165px;
+}
+.input-search {
+  border: none;
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
 }
 .container{
   max-width: 900px;
@@ -129,11 +140,19 @@ body{
 
 .filters {
   background-color: rgb(131,197,190, 0.3 );
-  padding: 3px;
-  border-radius: 1px;
+  padding: 6px;
+  border-radius: 5px;
   color: rgb(131 197 190);
   font-weight: 700;
   margin-left: 15px;
+  border: none;
+}
+.filters:hover {
+  background-color:#006d77 ;
+  opacity: .4;
+  color: #fff;
+  transition: 0.4s;
+  cursor: pointer;
 }
 
 .languages{
@@ -145,4 +164,13 @@ body{
 .featured-border {
   background-color: #000;
   width: 150px;
+}
+
+.teste{
+  width: 90%;
+  background-color: red;
+  height: 100%;
+  padding: 0 10px;
+  align-items: center;
+  display: flex;
 }
