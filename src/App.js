@@ -43,25 +43,27 @@ function App() {
     <div>
       <div className="header">
         <img src={Header} alt="HeaderDesktop" width="100%" />
+        <div className="container-search-bar">
         <div className="search-bar">
           <div className="teste">
             <div>
-            <label>{busca}<button hidden={true}>X</button></label>
-            
+            { busca && <div className="labal-container"><label>{busca}<button>X</button></label> </div>}
             </div>
-          </div>
             <button className="clear-button">clear</button>
+          </div>
+        </div>
         </div>
       </div>
-      {job
-        .filter((e) => {
+      {job.filter((e) => {
+          let languagesFilter = e.languages.some((q) => busca === q)
+          let toolsFilter = e.tools.some((q) => busca === q)
           if (busca === "") {
             return e;
           } else {
             if (
               e.role === busca ||
-              e.languages[0] === busca ||
-              e.tools[0] === busca ||
+              languagesFilter  ||
+              toolsFilter ||
               e.level === busca
             ) {
               return e;
