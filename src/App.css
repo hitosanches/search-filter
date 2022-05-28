@@ -9,18 +9,20 @@ body{
   margin-bottom: 70px;
   flex-direction: column;
 }
-
-.search-bar {
+.container-search-bar{
   display: flex;
   align-items: center;
-  width: 900px;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+.search-bar {
+  width: calc(100vw - 34vw);
   margin: 0 auto;
   background: #fff;
   height: 55px;
   border-radius: 5px;
   position: absolute;
-  margin-left: 260px;
-  margin-top: 165px;
 }
 .input-search {
   border: none;
@@ -167,10 +169,16 @@ body{
 }
 
 .teste{
-  width: 90%;
-  background-color: red;
+  background-color: #fff;
   height: 100%;
   padding: 0 10px;
   align-items: center;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+}
+.label-container{
+  background: rgb(131,197,190, 0.3 );
+  padding: 5px;
   display: flex;
 }
