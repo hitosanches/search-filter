@@ -23,6 +23,9 @@ body{
   height: 55px;
   border-radius: 5px;
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .input-search {
   border: none;
@@ -178,7 +181,45 @@ body{
   border-radius: 5px;
 }
 .label-container{
-  background: rgb(131,197,190, 0.3 );
   padding: 5px;
   display: flex;
+  margin-right: 10px;
+}
+.searched-items{
+  background-color: rgb(131,197,190, 0.5);
+  padding: 6px;
+  align-items: center;
+  display: flex;
+  border-radius: 5px 0 0 5px;
+}
+.button-remove {
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 9px 11px 9px 11px;
+}
+.button-remove:hover{
+  cursor: pointer;
+  background-color: #000;
+  border-radius: 0 5px 5px 0;
+}
+.button-remove-container {
+  background-color: rgb(131,197,190);
+  border-radius: 0 5px 5px 0;
+}
+.div-searched {
+  display: flex;
+  align-items: center;
+}
+.clear-button {
+  border: none;
+  background: none;
+  color: #006d77;
+  margin-right: 10px;
+}
+.clear-button:hover {
+  border-bottom: 1px solid rgb(0,109,119, 0.5);
+  width: 41px;
+  height: 15px;
+  cursor: pointer;
 }

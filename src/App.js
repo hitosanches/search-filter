@@ -18,7 +18,6 @@ function App() {
   }, []);
   
   let indice = busca.length - 1
-  console.log(busca.length)
   const filtro =job.filter((e) => {
      let languagesFilter = e.languages.find(item => item === busca[indice])
      let toolsFilter = e.tools.find(item => item === busca[indice])
@@ -36,6 +35,30 @@ function App() {
     }
   }
 })
+const clearAll = () => {
+  setBusca([])
+  fetch("./data.json", {
+    headers: {
+      Accept: "application/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((res) => setJob(res));
+}
+
+const removeOne = (item) => {
+ setBusca(busca.filter((e,index) => busca[index] !== busca[item])) 
+ fetch("./data.json", {
+  headers: {
+    Accept: "application/json",
+  },
+})
+  .then((res) => res.json())
+  .then((res) => setJob(res));
+
+  
+}
+
   return (
     <div>
       <div className="header">
@@ -43,11 +66,11 @@ function App() {
         <div className="container-search-bar">
         <div className="search-bar">
           <div className="teste">
-            {busca.length === 0 ? <div className="labal-container"><label>{busca}<button>X</button></label></div> : 
+            {busca.length === 0 ? <div className="label-container"></div> : 
             busca.map((item, key) =>(
-            <div key={key} className="labal-container"><label>{item}<button>X</button></label></div>))}
-            <button className="clear-button">clear</button>
+            <div key={key} className="label-container"><div className="div-searched"><label className="searched-items">{item}</label><div className="button-remove-container"><button className="button-remove"onClick={() => removeOne(key)} >X</button></div> </div></div>))}
           </div>
+            <div><button className="clear-button" onClick={() => clearAll()}>clear</button></div>
         </div>  
         </div>
       </div>
